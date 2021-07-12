@@ -7,6 +7,8 @@ class People {
   factory People.fromJson(dynamic data) {
     return People(data['name']);
   }
+
+  get length => null;
 }
 
 class StarWarRepo {
