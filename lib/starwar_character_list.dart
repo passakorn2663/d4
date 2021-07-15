@@ -19,7 +19,7 @@ class _StarWarCharacterList extends State<StarWarCharacterList> {
   late List<People> _people;
   // late bool _hasMore;
   late bool _loading;
-  // final int _defaultCharatorPerPageCount = 10;
+  // final int _defaultCharaterPerPageCount = 10;
   // final int _nextPageThreshold = 10;
   late bool _error;
   final ScrollController _scrollController;
@@ -48,6 +48,7 @@ class _StarWarCharacterList extends State<StarWarCharacterList> {
     try {
       var people = await _repo.fetchPeople(page: _page);
       setState(() {
+        // _hasMore = people.length == _defaultCharaterPerPageCount;
         _loading = false;
         _people = List<People>.from(people);
         _page += 1;
@@ -118,12 +119,14 @@ class _StarWarCharacterList extends State<StarWarCharacterList> {
               }
             }
             final People people = _people[index];
-            final int id = _people.length;
+            final picId =
+                people.url.toString().split("https://swapi.dev/api/people/")[1];
+            print(picId);
             return Card(
               child: Column(
                 children: <Widget>[
                   Image.network(
-                    "https://starwars-visualguide.com/assets/img/characters/${id}.jpg",
+                    "https://starwars-visualguide.com/assets/img/characters/${picId.split("/")[0]}.jpg",
                     fit: BoxFit.fitWidth,
                     width: double.infinity,
                     height: 160,

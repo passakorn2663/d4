@@ -2,10 +2,14 @@ import 'package:dio/dio.dart';
 
 class People {
   final String name;
-  People(this.name);
+  String url;
 
-  factory People.fromJson(dynamic data) {
-    return People(data['name']);
+  People({required this.name, required this.url /*, required this.id*/});
+
+  factory People.fromJson(Map<String, dynamic> data) {
+    // var picId = data['url'].split("http://swapi.dev/api/people/")[1];
+    return People(
+        name: data['name'], url: data['url'] /*, id: picId.split('/')[0]*/);
   }
 
   get length => null;
