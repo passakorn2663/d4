@@ -37,6 +37,24 @@ class _StarWarCharacterList extends State<StarWarCharacterList> {
     _loading = true;
     _error = false;
     fetchPeople();
+    _scrollController.addListener(_scrollListener);
+  }
+
+  _scrollListener() {
+    // print(_controller.offset);
+    // print('>> ${_controller.position.maxScrollExtent}');
+    if (_scrollController.offset >=
+            _scrollController.position.maxScrollExtent &&
+        !_scrollController.position.outOfRange) {
+      if (_repo.next != null) {
+        setState(() {
+          _page += 1;
+          _loading = true;
+        });
+        fetchPeople();
+        print("page $_page, next ${_repo.next}");
+      }
+    }
   }
 
   @override
@@ -92,7 +110,7 @@ class _StarWarCharacterList extends State<StarWarCharacterList> {
     } else {
       return ListView.builder(
           controller: _scrollController,
-          itemCount: _people.length,
+          itemCount: _people.length + (_repo.next != null ? 1 : 0),
           itemBuilder: (context, index) {
             if (index == _people.length) {
               if (_error) {
