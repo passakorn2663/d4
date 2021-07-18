@@ -145,9 +145,9 @@ class _StarWarCharacterList extends State<StarWarCharacterList> {
                 children: <Widget>[
                   Image.network(
                     "https://starwars-visualguide.com/assets/img/characters/${picId.split("/")[0]}.jpg",
-                    fit: BoxFit.fitWidth,
-                    width: double.infinity,
-                    height: 160,
+                    // fit: BoxFit.fitWidth,
+                    width: 500,
+                    height: 500,
                   ),
                   Padding(
                     padding: const EdgeInsets.all(16),
